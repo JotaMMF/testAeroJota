@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Aero Desktop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 7.css -->
+    <link rel="stylesheet" href="https://unpkg.com/7.css/dist/7.scoped.css">
+    <!-- Your styles -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+
+            <!--TOP BAR-------------------------------->
+
+            <div class="cell h win7">
+                <div class="window glass active" style="width: 100%; --w7-w-bg: #ff9900;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Jota's DC Page!!</div>
+                        <div class="title-bar-controls">
+                            <button aria-label="Minimize"></button>
+                            <button aria-label="Maximize"></button>
+                            <button aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="window-body has-space top">
+                        <h1>WELCOME TO THE JOTA PAGE!!!</h1>
+                    </div>
+                </div>
+            </div>
+
+            <!--LEFT------------------------------->
+
+            <div class="cell s-left win7">
+                <div class="window glass active" style="width: 100%; --w7-w-bg: #6cd87e;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Jotabs</div>
+                        <div class="title-bar-controls">
+                            <button aria-label="Minimize"></button>
+                            <button aria-label="Maximize"></button>
+                            <button aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="window-body has-space">
+                        <section class="tabs" style="max-width: 550px">
+                            <menu role="tablist" aria-label="Tabs">
+                                <button role="tab" aria-controls="tab-A" aria-selected="true">GitHub</button>
+                                <button role="tab" aria-controls="tab-B">CodePen</button>
+                                <button role="tab" aria-controls="tab-C" disabled> Exámenes</button>
+                            </menu>
+                            <!-- the tab content -->
+                            <article role="tabpanel" id="tab-A">
+                                <h3>Proyectos GitHub</h3>
+                                <hr>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            <p><a href="https://jotammf.github.io/JotaEncrypt/" target="_blank">Jota's Page of Encryption</a></p>
+                                        </li>
+                                        <li>
+                                            <p><a href="https://jotammf.github.io/pasarelaJota/">Pasarela de Coches GT2</a></p>
+                                        </li>
+                                        <li>
+                                            <p><a href="https://github.com/JotaMMF/paginaFigmaBanderas.git">Diseño Página Banderas</a></p>
+                                        </li>
+                                    </ul>
+                                </p>
+                                
+                            </article>
+
+                            
+                            <article role="tabpanel" id="tab-B" hidden>
+                                <h3>More...</h3>
+                                <p>This tab contains a GroupBox</p>
+                                
+                            </article>
+                            <article role="tabpanel" id="tab-C" hidden>
+                                <h3>Trampos@</h3>
+                                <p>Nun faigas trampes.</p>
+                                
+                            </article>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="cell x">X</div>
+            <div class="cell s-right">S</div>
+            <div class="cell f">F</div>
+            <div class="cell EX">EX</div>
+        </div>
+    </body>
+
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
