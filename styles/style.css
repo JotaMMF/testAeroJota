@@ -2,7 +2,7 @@ body {
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     /* centers vertically */
     min-height: 100vh;
     background: url("../img/asadal.jpg") no-repeat center center fixed;
@@ -34,7 +34,7 @@ body {
 .cell {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     width: 100%;
     /* fill grid cell */
     height: 100%;
@@ -92,6 +92,11 @@ details[open] > *:not(summary) {
 
 .cell.f {
     grid-column: 1 / 4;
+}
+
+.cell.f .window-body{
+        background-image: url("../img/water-43.gif");
+
 }
 
 .cell.EX {
