@@ -19,3 +19,17 @@ tabs.forEach(tab => {
         });
     });
 });
+
+document.querySelectorAll(".accordion").forEach((details) => {
+  const content = Array.from(details.children).slice(1);
+
+  details.addEventListener("toggle", () => {
+    const section = content[0];
+
+    if (details.open) {
+      section.style.maxHeight = section.scrollHeight + "px";
+    } else {
+      section.style.maxHeight = "0px";
+    }
+  });
+});

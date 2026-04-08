@@ -69,6 +69,27 @@ body {
     grid-column: 2 / 4;
 }
 
+details {
+  margin-bottom: 8px;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* wrapper for animation */
+details > *:not(summary) {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+/* when open */
+details[open] > *:not(summary) {
+  max-height: 200px; /* adjust depending on content */
+}
+
 .cell.f {
     grid-column: 1 / 4;
 }
