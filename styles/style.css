@@ -1,3 +1,19 @@
+@keyframes wiggle {
+	0% {
+		transform: rotate(3deg);
+	}
+	50% {
+		transform: rotate(-3deg);
+	}
+	100% {
+		transform: rotate(3deg);
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
 body {
     margin: 0;
     display: flex;
@@ -46,7 +62,8 @@ body {
     margin: 0;                 /* remove default h1 margin */
     font-size: 1.5rem;         /* adjust size if needed */
     -webkit-text-stroke: 1px rgb(2, 72, 104);
-    color:white
+    color:white;
+    animation: wiggle 10s infinite;
 }
 
 
@@ -96,6 +113,8 @@ details[open] > *:not(summary) {
 
 .cell.f .window-body{
         background-image: url("../img/water-43.gif");
+        background-repeat: no-repeat;
+        background-size: cover; /* or contain */
 
 }
 

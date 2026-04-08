@@ -2,22 +2,22 @@ const tabs = document.querySelectorAll('[role="tab"]');
 const panels = document.querySelectorAll('[role="tabpanel"]');
 
 tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        const targetId = tab.getAttribute('aria-controls');
+  tab.addEventListener('click', () => {
+    const targetId = tab.getAttribute('aria-controls');
 
-        // 1️⃣ Update aria-selected on all tabs
-        tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
-        tab.setAttribute('aria-selected', 'true');
+    // 1️⃣ Update aria-selected on all tabs
+    tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+    tab.setAttribute('aria-selected', 'true');
 
-        // 2️⃣ Show the correct panel, hide others
-        panels.forEach(panel => {
-            if (panel.id === targetId) {
-                panel.hidden = false;
-            } else {
-                panel.hidden = true;
-            }
-        });
+    // 2️⃣ Show the correct panel, hide others
+    panels.forEach(panel => {
+      if (panel.id === targetId) {
+        panel.hidden = false;
+      } else {
+        panel.hidden = true;
+      }
     });
+  });
 });
 
 document.querySelectorAll(".accordion").forEach((details) => {
@@ -33,3 +33,30 @@ document.querySelectorAll(".accordion").forEach((details) => {
     }
   });
 });
+
+const player = document.getElementById("audioPlayer");
+
+player.addEventListener("ended", () => {
+  playRandomSong();
+});
+
+player.volume = 0.25;
+
+// MUSIC PLAYER
+const songs = [
+  "snd/NITORI IN JAZZ.mp3",
+  "snd/Strawberry Crisis.mp3",
+  "snd/Fernet's Theme.mp3",
+  "snd/Service Area.mp3"
+];
+
+function playRandomSong() {
+  const randomIndex = Math.floor(Math.random() * songs.length);
+  player.src =  songs[randomIndex];
+  player.play();
+}
+
+// Play a random song when page loads
+window.onload = playRandomSong;
+
+

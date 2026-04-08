@@ -63,11 +63,11 @@
                                                 of Encryption</a></p>
                                     </li>
                                     <li>
-                                        <p><a href="https://jotammf.github.io/pasarelaJota/">Pasarela de Coches GT2</a>
+                                        <p><a href="https://jotammf.github.io/pasarelaJota/" target="_blank">Pasarela de Coches GT2</a>
                                         </p>
                                     </li>
                                     <li>
-                                        <p><a href="https://github.com/JotaMMF/paginaFigmaBanderas.git">Diseño Página
+                                        <p><a href="https://github.com/JotaMMF/paginaFigmaBanderas.git" target="_blank">Diseño Página
                                                 Banderas</a></p>
                                     </li>
                                 </ul>
@@ -108,7 +108,7 @@
 
             <!--RIGHT------------------------------->
             <div class="cell x win7">
-                <div class="window active" style="max-width: 300px">
+                <div class="window active" >
                     <div class="title-bar">
                         <div class="title-bar-text">About me</div>
                         <div class="title-bar-controls">
@@ -156,7 +156,7 @@
 
             <!--BOTTOM------------------------------->
             <div class="cell f win7">
-                <div class="window active" style="max-width: 400px">
+                <div class="window active">
                     <div class="title-bar">
                         <div class="title-bar-text">How about some music</div>
                         <div class="title-bar-controls">
@@ -166,9 +166,10 @@
                         </div>
                     </div>
                     <div class="window-body has-space">
-                        <audio controls>
-                            <source src="billywasgreatbutthisisbetter.mp3" type="audio/mpeg">
+                        <audio id="audioPlayer" controls>
                         </audio>
+                        <br>
+                        <button onclick="playRandomSong()">Play Random Song</button>
                     </div>
                 </div>
             </div>
