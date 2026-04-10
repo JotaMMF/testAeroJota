@@ -44,10 +44,10 @@ player.volume = 0.25;
 
 // MUSIC PLAYER
 const songs = [
-  "snd/NITORI IN JAZZ.mp3",
-  "snd/Strawberry Crisis.mp3",
-  "snd/Fernet's Theme.mp3",
-  "snd/Service Area.mp3"
+  "https://files.catbox.moe/9pk0tz.mp3",
+  "https://files.catbox.moe/va5q43.mp3",
+  "https://files.catbox.moe/dhv4hb.mp3",
+  "https://files.catbox.moe/ih2z66.mp3"
 ];
 
 function playRandomSong() {

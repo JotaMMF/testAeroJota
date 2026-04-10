@@ -1,13 +1,7 @@
 @keyframes wiggle {
-	0% {
-		transform: rotate(3deg);
-	}
-	50% {
-		transform: rotate(-3deg);
-	}
-	100% {
-		transform: rotate(3deg);
-	}
+	0% { transform: rotate(3deg); }
+	50% { transform: rotate(-3deg); }
+	100% { transform: rotate(3deg); }
 }
 
 * {
@@ -15,140 +9,146 @@
 }
 
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    /* centers vertically */
-    min-height: 100vh;
-    background: url("../img/asadal.jpg") no-repeat center center fixed;
-    background-size: cover;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	min-height: 100vh;
+	background: url("../img/asadal.jpg") no-repeat center center fixed;
+	background-size: cover;
 }
 
+/* =========================
+   GRID CONTAINER (FLUID)
+========================= */
 .container {
-    display: grid;
+	display: grid;
 
-    /* Responsive columns — each at least 150px, then share space */
-    grid-template-columns: repeat(3, minmax(150px, 1fr));
+	/* Automatically fit as many columns as possible */
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
-    /* Responsive rows — auto to content */
-    grid-auto-rows: minmax(100px, auto);
+	grid-auto-rows: minmax(100px, auto);
+	gap: 2vw;
 
-    gap: 2vw;
-    /* relative gap */
-    width: 95vw;
-    /* container scales with viewport */
-    max-width: 1200px;
-    /* optional limit on large screens */
-    /* Add padding from the top */
-    margin-top: 50px;
-    /* adjust as needed */
+	width: 95vw;
+	max-width: 1200px;
+	margin-top: 50px;
 }
 
-
-
+/* =========================
+   CELLS
+========================= */
 .cell {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    width: 100%;
-    /* fill grid cell */
-    height: 100%;
-    font-size: calc(1rem + 0.5vw);
-    /* text scales with screen */
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	width: 100%;
+	height: 100%;
+	font-size: calc(1rem + 0.5vw);
 }
 
+/* Headings */
 .cell h1 {
-    margin: 0;                 /* remove default h1 margin */
-    font-size: 1.5rem;         /* adjust size if needed */
-    -webkit-text-stroke: 1px rgb(2, 72, 104);
-    color:white;
-    animation: wiggle 10s infinite;
+	margin: 0;
+	font-size: 1.5rem;
+	-webkit-text-stroke: 1px rgb(2, 72, 104);
+	color: white;
+	animation: wiggle 10s infinite;
 }
 
+/* =========================
+   SMART SPANNING
+   (only when space allows)
+========================= */
 
-/* Top row H spans all 3 columns */
-.cell.h {
-    grid-column: 1 / 4;
-    
-}
-
-.window-body.has-space.top{
-    background: url("../img/asadal_top.jpg") no-repeat center center fixed;
-    background-size: auto;
-}
-
-.cell.s-left {
-    grid-column: 1 / 2;
-}
-
-.cell.x {
-    grid-column: 2 / 4;
-}
-
-details {
-  margin-bottom: 8px;
-}
-
-summary {
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* wrapper for animation */
-details > *:not(summary) {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease;
-}
-
-/* when open */
-details[open] > *:not(summary) {
-  max-height: 200px; /* adjust depending on content */
-}
-
-.cell.f {
-    grid-column: 1 / 4;
-}
-
-.cell.f .window-body{
-        background-image: url("../img/water-43.gif");
-        background-repeat: no-repeat;
-        background-size: cover; /* or contain */
-
-}
-
+/* Full-width elements */
+.cell.h,
+.cell.f,
 .cell.EX {
-    grid-column: 1 / 4;
+	grid-column: 1 / -1;
+}
+
+/* Two-column layout when possible */
+.cell.x {
+	grid-column: span 2;
+}
+
+/* Left single column */
+.cell.s-left {
+	grid-column: span 1;
+}
+
+/* =========================
+   CONTENT STYLES
+========================= */
+
+.window-body.has-space.top {
+	background: url("../img/asadal_top.jpg") no-repeat center center fixed;
+	background-size: auto;
+}
+
+.cell.f .window-body {
+	background-image: url("../img/water-43.gif");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .window-body {
-    text-align: center;
+	text-align: center;
 }
 
 .win7 .window {
-    width: 90%;
-    /* relative to cell width */
+    width: 100%;
     max-width: 100%;
-    /* prevent overflow */
 }
 
+/* =========================
+   DETAILS ANIMATION
+========================= */
+
+details {
+	margin-bottom: 8px;
+}
+
+summary {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+details > *:not(summary) {
+	overflow: hidden;
+	max-height: 0;
+	transition: max-height 0.3s ease;
+}
+
+details[open] > *:not(summary) {
+	max-height: 200px;
+}
+
+/* =========================
+   LIST RESET
+========================= */
 
 article[role="tabpanel"] ul {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
+/* =========================
+   OPTIONAL: FORCE STACK ON VERY SMALL SCREENS
+========================= */
 
+@media (max-width: 500px) {
+	.container {
+		grid-template-columns: 1fr;
+	}
 
-/* Stack into one column on narrow screens */
-@media (max-width: 600px) {
-    .container {
-        grid-template-columns: 1fr;
-        grid-auto-rows: minmax(80px, auto);
-    }
-
-    .cell {
-        font-size: 1rem;
-    }
+	/* Remove spanning so everything stacks cleanly */
+	.cell.h,
+	.cell.f,
+	.cell.EX,
+	.cell.x,
+	.cell.s-left {
+		grid-column: auto;
+	}
 }
