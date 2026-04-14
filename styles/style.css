@@ -4,6 +4,9 @@
 	100% { transform: rotate(3deg); }
 }
 
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
 * {
 	box-sizing: border-box;
 }
@@ -14,19 +17,17 @@ body {
 	justify-content: center;
 	align-items: start;
 	min-height: 100vh;
+
 	background: url("../img/asadal.jpg") no-repeat center center fixed;
 	background-size: cover;
 }
 
-/* =========================
-   GRID CONTAINER (FLUID)
-========================= */
+/* =========================================================
+   MAIN GRID LAYOUT (MOBILE FIRST)
+========================================================= */
 .container {
 	display: grid;
-
-	/* Automatically fit as many columns as possible */
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
+	grid-template-columns: 1fr;
 	grid-auto-rows: minmax(100px, auto);
 	gap: 2vw;
 
@@ -35,77 +36,90 @@ body {
 	margin-top: 50px;
 }
 
-/* =========================
-   CELLS
-========================= */
+/* =========================================================
+   DESKTOP LAYOUT (3 COLUMNS)
+========================================================= */
+@media (min-width: 900px) {
+	.container {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.cell.s-left { grid-column: 1; }
+	.cell.x { grid-column: 2; }
+	.cell.x-right { grid-column: 3; }
+}
+
+/* =========================================================
+   CELL BASE STYLE
+========================================================= */
 .cell {
 	display: flex;
 	justify-content: center;
 	align-items: start;
+
 	width: 100%;
 	height: 100%;
+
 	font-size: calc(1rem + 0.5vw);
 }
 
-/* Headings */
+/* Animated headings */
 .cell h1 {
 	margin: 0;
 	font-size: 1.5rem;
+
 	-webkit-text-stroke: 1px rgb(2, 72, 104);
 	color: white;
+
 	animation: wiggle 10s infinite;
 }
 
-/* =========================
-   SMART SPANNING
-   (only when space allows)
-========================= */
-
-/* Full-width elements */
+/* =========================================================
+   FULL WIDTH SECTIONS
+========================================================= */
 .cell.h,
 .cell.f,
 .cell.EX {
 	grid-column: 1 / -1;
 }
 
-/* Two-column layout when possible */
-.cell.x {
-	grid-column: span 2;
+/* =========================================================
+   RESET FOR SAFETY
+========================================================= */
+.cell.s-left,
+.cell.x,
+.cell.x-right {
+	grid-column: auto;
 }
 
-/* Left single column */
-.cell.s-left {
-	grid-column: span 1;
+/* =========================================================
+   WINDOW STYLING (7.css)
+========================================================= */
+.window-body {
+	text-align: center;
 }
 
-/* =========================
-   CONTENT STYLES
-========================= */
+.win7 .window {
+	width: 100%;
+	max-width: 100%;
+}
 
+/* Top banner background */
 .window-body.has-space.top {
 	background: url("../img/asadal_top.jpg") no-repeat center center fixed;
 	background-size: auto;
 }
 
+/* Bottom music background */
 .cell.f .window-body {
 	background-image: url("../img/water-43.gif");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 
-.window-body {
-	text-align: center;
-}
-
-.win7 .window {
-    width: 100%;
-    max-width: 100%;
-}
-
-/* =========================
-   DETAILS ANIMATION
-========================= */
-
+/* =========================================================
+   DETAILS / ACCORDION SYSTEM
+========================================================= */
 details {
 	margin-bottom: 8px;
 }
@@ -115,6 +129,7 @@ summary {
 	font-weight: bold;
 }
 
+/* smooth collapse */
 details > *:not(summary) {
 	overflow: hidden;
 	max-height: 0;
@@ -125,30 +140,97 @@ details[open] > *:not(summary) {
 	max-height: 200px;
 }
 
-/* =========================
-   LIST RESET
-========================= */
-
 article[role="tabpanel"] ul {
 	list-style: none;
 	padding: 0;
 }
 
-/* =========================
-   OPTIONAL: FORCE STACK ON VERY SMALL SCREENS
-========================= */
+/* =========================================================
+   SIDE GRID (WIN7 DESKTOP STYLE)
+========================================================= */
+.side-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 8px;
+	padding: 10px;
+}
 
-@media (max-width: 500px) {
+/* icon tile */
+.side-grid a {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	padding: 8px 10px;
+	border-radius: 3px;
+
+	text-decoration: none;
+
+	color: #1a1a1a;
+	background: rgba(255, 255, 255, 0.25);
+
+	border: 1px solid transparent;
+
+	font-family: "Segoe UI", Tahoma, sans-serif;
+	font-size: 0.9rem;
+
+	transition: background 0.12s ease, border 0.12s ease, transform 0.08s ease;
+}
+
+/* hover selection (Win7 blue) */
+.side-grid a:hover {
+	background: rgba(51, 153, 255, 0.18);
+	border: 1px solid rgba(51, 153, 255, 0.45);
+	transform: translateY(-1px);
+}
+
+/* click feedback */
+.side-grid a:active {
+	background: rgba(51, 153, 255, 0.28);
+	transform: translateY(0px);
+}
+
+/* =========================================================
+   ICONS (TRUE DARK FIX — NO FILTERS)
+========================================================= */
+.side-grid i,
+.side-grid svg {
+	font-size: 1.25rem;
+	color: #1b1b1b !important;
+	fill: #1b1b1b !important;
+	filter: none !important;
+	opacity: 1;
+	min-width: 22px;
+	text-align: center;
+}
+
+.side-grid img {
+	width: 20px;
+	height: 20px;
+	filter: none;
+	opacity: 1;
+}
+
+/* optional text wrapper */
+.side-grid a span {
+	line-height: 1.1;
+	display: block;
+}
+
+/* =========================================================
+   MOBILE STACKING
+========================================================= */
+@media (max-width: 899px) {
 	.container {
 		grid-template-columns: 1fr;
 	}
 
-	/* Remove spanning so everything stacks cleanly */
 	.cell.h,
 	.cell.f,
 	.cell.EX,
+	.cell.s-left,
 	.cell.x,
-	.cell.s-left {
-		grid-column: auto;
+	.cell.x-right {
+		grid-column: auto !important;
 	}
 }
