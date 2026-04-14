@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
 	{
 		"name": "YouTube",
@@ -84,4 +85,92 @@
 		"url": "https://music.youtube.com",
 		"icon": "fa-brands fa-youtube"
 	}
+=======
+[
+	{
+		"name": "YouTube",
+		"url": "https://youtube.com",
+		"icon": "fa-brands fa-youtube"
+	},
+	{
+		"name": "Google",
+		"url": "https://google.com",
+		"icon": "fa-brands fa-google"
+	},
+	{
+		"name": "GitHub",
+		"url": "https://github.com",
+		"icon": "fa-brands fa-github"
+	},
+	{
+		"name": "Maps",
+		"url": "https://maps.google.com",
+		"icon": "fa-solid fa-map"
+	},
+
+	{
+		"name": "Gmail",
+		"url": "https://mail.google.com",
+		"icon": "fa-solid fa-envelope"
+	},
+	{
+		"name": "Drive",
+		"url": "https://drive.google.com",
+		"icon": "fa-brands fa-google-drive"
+	},
+	{
+		"name": "Docs",
+		"url": "https://docs.google.com",
+		"icon": "fa-solid fa-file-lines"
+	},
+	{
+		"name": "Sheets",
+		"url": "https://sheets.google.com",
+		"icon": "fa-solid fa-table"
+	},
+
+	{
+		"name": "ChatGPT",
+		"url": "https://chat.openai.com",
+		"icon": "fa-solid fa-robot"
+	},
+	{
+		"name": "Wikipedia",
+		"url": "https://wikipedia.org",
+		"icon": "fa-brands fa-wikipedia-w"
+	},
+
+	{
+		"name": "Reddit",
+		"url": "https://reddit.com",
+		"icon": "fa-brands fa-reddit"
+	},
+	{
+		"name": "X (Twitter)",
+		"url": "https://x.com",
+		"icon": "fa-brands fa-x-twitter"
+	},
+
+	{
+		"name": "Trello",
+		"url": "https://trello.com",
+		"icon": "fa-brands fa-trello"
+	},
+	{
+		"name": "Notion",
+		"url": "https://notion.so",
+		"icon": "fa-solid fa-note-sticky"
+	},
+
+	{
+		"name": "Spotify",
+		"url": "https://open.spotify.com",
+		"icon": "fa-brands fa-spotify"
+	},
+	{
+		"name": "YouTube Music",
+		"url": "https://music.youtube.com",
+		"icon": "fa-brands fa-youtube"
+	}
+>>>>>>> d82203538a420f59dba8fb89017d1f65b038c227
 ]
