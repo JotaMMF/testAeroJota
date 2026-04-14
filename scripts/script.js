@@ -1,13 +1,18 @@
 
 /* =========================================================
-   ARIA TAB SYSTEM
+   TAB SYSTEM (ARIA ACCESSIBLE)
    - Handles switching between tab panels
 ========================================================= */
 
 const tabs = document.querySelectorAll('[role="tab"]');
 const panels = document.querySelectorAll('[role="tabpanel"]');
 
+/**
+ * Activates a tab and shows its matching panel
+ */
 function activateTab(tab) {
+	if (!tab) return;
+
 	const targetId = tab.getAttribute("aria-controls");
 
 	// Reset all tabs
@@ -22,24 +27,33 @@ function activateTab(tab) {
 	});
 }
 
-// Attach tab listeners
-tabs.forEach(tab => {
-	tab.addEventListener("click", () => activateTab(tab));
-});
+/* Initialize tabs safely */
+if (tabs.length && panels.length) {
+	tabs.forEach((tab, i) => {
+		tab.addEventListener("click", () => activateTab(tab));
+
+		// Set initial ARIA state
+		tab.setAttribute("aria-selected", i === 0 ? "true" : "false");
+	});
+
+	// Show first panel by default
+	panels.forEach((p, i) => {
+		p.hidden = i !== 0;
+	});
+}
 
 
 /* =========================================================
-   ACCORDION SYSTEM (OPTIONAL)
-   - Smooth expand/collapse using max-height
+   ACCORDION SYSTEM (SMOOTH DETAILS ANIMATION)
+   - Works with <details> elements
 ========================================================= */
 
-document.querySelectorAll(".accordion").forEach(details => {
-	const content = Array.from(details.children).slice(1);
+document.querySelectorAll("details.accordion").forEach(details => {
+	const section = details.querySelector(":scope > *:not(summary)");
+
+	if (!section) return;
 
 	details.addEventListener("toggle", () => {
-		const section = content[0];
-		if (!section) return;
-
 		if (details.open) {
 			section.style.maxHeight = section.scrollHeight + "px";
 		} else {
@@ -50,7 +64,8 @@ document.querySelectorAll(".accordion").forEach(details => {
 
 
 /* =========================================================
-   AUDIO PLAYER (RANDOM MUSIC)
+   AUDIO PLAYER (RANDOM BACKGROUND MUSIC)
+   - Safe start (user interaction required by browsers)
 ========================================================= */
 
 const player = document.getElementById("audioPlayer");
@@ -62,71 +77,94 @@ const songs = [
 	"https://files.catbox.moe/ih2z66.mp3"
 ];
 
+let lastIndex = -1;
+
+/**
+ * Plays a random song without repeating the last one
+ */
 function playRandomSong() {
-	const index = Math.floor(Math.random() * songs.length);
+	if (!player) return;
+
+	let index;
+	do {
+		index = Math.floor(Math.random() * songs.length);
+	} while (index === lastIndex);
+
+	lastIndex = index;
 
 	player.src = songs[index];
-	player.play();
+	player.play().catch(() => {
+		// Autoplay may be blocked until user interaction
+	});
 }
 
-// Volume control
-player.volume = 0.10;
+/* Audio setup */
+if (player) {
+	player.volume = 0.10;
+	player.addEventListener("ended", playRandomSong);
+}
 
-// Auto-next song
-player.addEventListener("ended", playRandomSong);
-
-// Start on page load
-window.addEventListener("load", playRandomSong);
+/* Start audio ONLY after user interaction (fixes DOMException) */
+window.addEventListener("click", () => {
+	playRandomSong();
+}, { once: true });
 
 
 /* =========================================================
-   SIDE MENU (JSON LOADER - NEOCITIES SAFE)
-   - Builds icon grid in right panel
-   - Works on Neocities static hosting
+   SIDE GRID (JSON LOADER - NEOCITIES SAFE)
+   - Builds Win7-style icon grid from links.json
 ========================================================= */
 
 const grid = document.getElementById("sideGrid");
 
+/**
+ * Safely escapes HTML to prevent injection issues
+ */
+function escapeHTML(str) {
+	return String(str)
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;");
+}
+
+/**
+ * Renders grid items
+ */
+function renderGrid(data) {
+	grid.innerHTML = data.map(item => `
+		<a class="side-item" href="${item.url}" target="_blank" rel="noopener noreferrer">
+			<i class="${item.icon}"></i>
+			<span>${escapeHTML(item.name)}</span>
+		</a>
+	`).join("");
+}
+
+/**
+ * Loads JSON file for side grid
+ */
 async function loadGrid() {
 	if (!grid) return;
 
 	try {
-		// Use relative path (safe for Neocities)
 		const res = await fetch("./data/links.json", {
-			cache: "no-cache"
+			cache: "no-store"
 		});
 
-		if (!res.ok) {
-			throw new Error(`HTTP error: ${res.status}`);
-		}
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
 		const data = await res.json();
-
 		renderGrid(data);
 
 	} catch (err) {
 		console.error("Failed to load links.json:", err);
 
-		// fallback UI so it doesn't look broken
 		grid.innerHTML = `
-			<div style="color:white;opacity:0.7;padding:10px;">
+			<div style="color:#1a1a1a;opacity:0.7;padding:10px;">
 				Links failed to load
 			</div>
 		`;
 	}
 }
 
-/**
- * Render grid items
- */
-function renderGrid(data) {
-	grid.innerHTML = data.map(item => `
-		<a class="side-item" href="${item.url}" target="_blank" rel="noopener noreferrer">
-			<i class="${item.icon}"></i>
-			<span>${item.name}</span>
-		</a>
-	`).join("");
-}
-
-/* Run after page load */
-window.addEventListener("load", loadGrid);
+/* Load grid after page is ready */
+window.addEventListener("DOMContentLoaded", loadGrid);
