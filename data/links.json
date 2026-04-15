@@ -1,14 +1,8 @@
-
 [
 	{
-		"name": "YouTube",
-		"url": "https://youtube.com",
-		"icon": "fa-brands fa-youtube"
-	},
-	{
-		"name": "Google",
-		"url": "https://google.com",
-		"icon": "fa-brands fa-google"
+		"name": "PeerTube",
+		"url": "https://joinpeertube.org",
+		"icon": "fa-solid fa-video"
 	},
 	{
 		"name": "GitHub",
@@ -16,36 +10,9 @@
 		"icon": "fa-brands fa-github"
 	},
 	{
-		"name": "Maps",
-		"url": "https://maps.google.com",
-		"icon": "fa-solid fa-map"
-	},
-
-	{
-		"name": "Gmail",
-		"url": "https://mail.google.com",
-		"icon": "fa-solid fa-envelope"
-	},
-	{
-		"name": "Drive",
-		"url": "https://drive.google.com",
-		"icon": "fa-brands fa-google-drive"
-	},
-	{
-		"name": "Docs",
-		"url": "https://docs.google.com",
-		"icon": "fa-solid fa-file-lines"
-	},
-	{
-		"name": "Sheets",
-		"url": "https://sheets.google.com",
-		"icon": "fa-solid fa-table"
-	},
-
-	{
-		"name": "ChatGPT",
-		"url": "https://chat.openai.com",
-		"icon": "fa-solid fa-robot"
+		"name": "OpenStreetMap",
+		"url": "https://www.openstreetmap.org",
+		"icon": "fa-solid fa-map-location-dot"
 	},
 	{
 		"name": "Wikipedia",
@@ -53,36 +20,30 @@
 		"icon": "fa-brands fa-wikipedia-w"
 	},
 
-	{
-		"name": "Reddit",
-		"url": "https://reddit.com",
-		"icon": "fa-brands fa-reddit"
-	},
-	{
-		"name": "X (Twitter)",
-		"url": "https://x.com",
-		"icon": "fa-brands fa-x-twitter"
-	},
 
 	{
-		"name": "Trello",
-		"url": "https://trello.com",
-		"icon": "fa-brands fa-trello"
+		"name": "CodePen",
+		"url": "https://codepen.io",
+		"icon": "fa-brands fa-codepen"
 	},
 	{
-		"name": "Notion",
-		"url": "https://notion.so",
-		"icon": "fa-solid fa-note-sticky"
-	},
-
-	{
-		"name": "Spotify",
-		"url": "https://open.spotify.com",
-		"icon": "fa-brands fa-spotify"
+		"name": "Matrix",
+		"url": "https://matrix.org",
+		"icon": "fa-solid fa-comments"
 	},
 	{
-		"name": "YouTube Music",
-		"url": "https://music.youtube.com",
-		"icon": "fa-brands fa-youtube"
+		"name": "Mastodon",
+		"url": "https://mastodon.social",
+		"icon": "fa-brands fa-mastodon"
+	},
+	{
+		"name": "Archive",
+		"url": "https://archive.org",
+		"icon": "fa-solid fa-box-archive"
+	},
+	{
+		"name": "Lemmy",
+		"url": "https://join-lemmy.org",
+		"icon": "fa-solid fa-comments"
 	}
 ]

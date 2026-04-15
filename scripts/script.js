@@ -111,37 +111,127 @@ window.addEventListener("click", () => {
 
 
 /* =========================================================
-   SIDE GRID (JSON LOADER - NEOCITIES SAFE)
-   - Builds Win7-style icon grid from links.json
+   SIDE GRID LOADER (ELITE VERSION)
+   - Safe DOM creation (NO innerHTML injection risks)
+   - Supports FontAwesome, images, emoji fallback
+   - Handles errors cleanly
+   - Beginner-friendly comments
 ========================================================= */
 
 const grid = document.getElementById("sideGrid");
 
-/**
- * Safely escapes HTML to prevent injection issues
- */
-function escapeHTML(str) {
-	return String(str)
-		.replaceAll("&", "&amp;")
-		.replaceAll("<", "&lt;")
-		.replaceAll(">", "&gt;");
+/* =========================================================
+   HELPER: CREATE ELEMENT (SHORTCUT FUNCTION)
+   Makes element creation cleaner and readable
+========================================================= */
+function createEl(tag, className, text) {
+	const el = document.createElement(tag);
+
+	if (className) el.className = className;
+	if (text) el.textContent = text;
+
+	return el;
 }
 
-/**
- * Renders grid items
- */
+/* =========================================================
+   CREATE ICON (SMART HANDLER)
+   Supports:
+   - FontAwesome (fa-solid fa-house)
+   - Images (img/icon.png)
+   - Emoji fallback (🌐)
+========================================================= */
+function createIcon(iconValue, name) {
+	let icon;
+
+	if (!iconValue) {
+		icon = createEl("span", "icon-fallback", "📁");
+		return icon;
+	}
+
+	// IMAGE ICON
+	if (iconValue.includes("/") || iconValue.startsWith("http")) {
+		icon = createEl("img");
+		icon.src = iconValue;
+		icon.alt = name || "icon";
+		return icon;
+	}
+
+	// FONT AWESOME ICON
+	if (iconValue.startsWith("fa")) {
+		icon = createEl("i", iconValue);
+		return icon;
+	}
+
+	// EMOJI / TEXT
+	icon = createEl("span", "icon-fallback", iconValue);
+	return icon;
+}
+
+/* =========================================================
+   CREATE ONE TILE
+========================================================= */
+function createTile(item) {
+
+	const link = createEl("a", "side-item");
+
+	// BASIC ATTRIBUTES
+	link.href = item.url || "#";
+	link.target = "_blank";
+	link.rel = "noopener noreferrer";
+
+	// TOOLTIP (nice UX bonus)
+	if (item.description) {
+		link.title = item.description;
+	}
+
+	// ICON
+	const icon = createIcon(item.icon, item.name);
+
+	// TEXT LABEL
+	const textWrap = createEl("span", "label");
+	const text = createEl("span", "title", item.name || "Untitled");
+
+	textWrap.appendChild(text);
+
+	// OPTIONAL DESCRIPTION (visible)
+	if (item.description) {
+		const desc = createEl("small", "desc", item.description);
+		textWrap.appendChild(desc);
+	}
+
+	// ASSEMBLE
+	link.appendChild(icon);
+	link.appendChild(textWrap);
+
+	// OPTIONAL CUSTOM CLASS (from JSON)
+	if (item.class) {
+		link.classList.add(item.class);
+	}
+
+	return link;
+}
+
+/* =========================================================
+   RENDER GRID
+========================================================= */
 function renderGrid(data) {
-	grid.innerHTML = data.map(item => `
-		<a class="side-item" href="${item.url}" target="_blank" rel="noopener noreferrer">
-			<i class="${item.icon}"></i>
-			<span>${escapeHTML(item.name)}</span>
-		</a>
-	`).join("");
+
+	// Clear safely
+	grid.innerHTML = "";
+
+	const fragment = document.createDocumentFragment();
+
+	data.forEach(item => {
+		const tile = createTile(item);
+		fragment.appendChild(tile);
+	});
+
+	grid.appendChild(fragment);
 }
 
-/**
- * Loads JSON file for side grid
- */
+/* =========================================================
+   LOAD JSON
+========================================================= */
 async function loadGrid() {
 	if (!grid) return;
 
@@ -153,18 +243,26 @@ async function loadGrid() {
 		if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
 		const data = await res.json();
+
+		// Validate: must be array
+		if (!Array.isArray(data)) {
+			throw new Error("JSON is not an array");
+		}
+
 		renderGrid(data);
 
 	} catch (err) {
-		console.error("Failed to load links.json:", err);
+		console.error("GRID LOAD FAILURE:", err);
 
 		grid.innerHTML = `
-			<div style="color:#1a1a1a;opacity:0.7;padding:10px;">
-				Links failed to load
+			<div class="grid-error">
+				⚠ Failed to load links
 			</div>
 		`;
 	}
 }
 
-/* Load grid after page is ready */
+/* =========================================================
+   INIT
+========================================================= */
 window.addEventListener("DOMContentLoaded", loadGrid);
