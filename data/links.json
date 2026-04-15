@@ -14,12 +14,6 @@
 		"url": "https://www.openstreetmap.org",
 		"icon": "fa-solid fa-map-location-dot"
 	},
-	{
-		"name": "Wikipedia",
-		"url": "https://wikipedia.org",
-		"icon": "fa-brands fa-wikipedia-w"
-	},
-
 
 	{
 		"name": "CodePen",
