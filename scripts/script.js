@@ -1,42 +1,29 @@
-
 /* =========================================================
    TAB SYSTEM (ARIA ACCESSIBLE)
-   - Handles switching between tab panels
 ========================================================= */
 
 const tabs = document.querySelectorAll('[role="tab"]');
 const panels = document.querySelectorAll('[role="tabpanel"]');
 
-/**
- * Activates a tab and shows its matching panel
- */
 function activateTab(tab) {
 	if (!tab) return;
 
 	const targetId = tab.getAttribute("aria-controls");
 
-	// Reset all tabs
 	tabs.forEach(t => t.setAttribute("aria-selected", "false"));
-
-	// Activate selected tab
 	tab.setAttribute("aria-selected", "true");
 
-	// Show matching panel, hide others
 	panels.forEach(panel => {
 		panel.hidden = panel.id !== targetId;
 	});
 }
 
-/* Initialize tabs safely */
 if (tabs.length && panels.length) {
 	tabs.forEach((tab, i) => {
 		tab.addEventListener("click", () => activateTab(tab));
-
-		// Set initial ARIA state
 		tab.setAttribute("aria-selected", i === 0 ? "true" : "false");
 	});
 
-	// Show first panel by default
 	panels.forEach((p, i) => {
 		p.hidden = i !== 0;
 	});
@@ -44,28 +31,23 @@ if (tabs.length && panels.length) {
 
 
 /* =========================================================
-   ACCORDION SYSTEM (SMOOTH DETAILS ANIMATION)
-   - Works with <details> elements
+   ACCORDION SYSTEM
 ========================================================= */
 
 document.querySelectorAll("details.accordion").forEach(details => {
 	const section = details.querySelector(":scope > *:not(summary)");
-
 	if (!section) return;
 
 	details.addEventListener("toggle", () => {
-		if (details.open) {
-			section.style.maxHeight = section.scrollHeight + "px";
-		} else {
-			section.style.maxHeight = "0px";
-		}
+		section.style.maxHeight = details.open
+			? section.scrollHeight + "px"
+			: "0px";
 	});
 });
 
 
 /* =========================================================
-   AUDIO PLAYER (RANDOM BACKGROUND MUSIC)
-   - Safe start (user interaction required by browsers)
+   AUDIO PLAYER
 ========================================================= */
 
 const player = document.getElementById("audioPlayer");
@@ -79,9 +61,6 @@ const songs = [
 
 let lastIndex = -1;
 
-/**
- * Plays a random song without repeating the last one
- */
 function playRandomSong() {
 	if (!player) return;
 
@@ -93,117 +72,78 @@ function playRandomSong() {
 	lastIndex = index;
 
 	player.src = songs[index];
-	player.play().catch(() => {
-		// Autoplay may be blocked until user interaction
-	});
+	player.play().catch(() => {});
 }
 
-/* Audio setup */
 if (player) {
 	player.volume = 0.10;
 	player.addEventListener("ended", playRandomSong);
 }
 
-/* Start audio ONLY after user interaction (fixes DOMException) */
 window.addEventListener("click", () => {
 	playRandomSong();
 }, { once: true });
 
 
 /* =========================================================
-   SIDE GRID LOADER (ELITE VERSION)
-   - Safe DOM creation (NO innerHTML injection risks)
-   - Supports FontAwesome, images, emoji fallback
-   - Handles errors cleanly
-   - Beginner-friendly comments
+   SIDE GRID LOADER
 ========================================================= */
 
 const grid = document.getElementById("sideGrid");
 
-/* =========================================================
-   HELPER: CREATE ELEMENT (SHORTCUT FUNCTION)
-   Makes element creation cleaner and readable
-========================================================= */
+/* Helper */
 function createEl(tag, className, text) {
 	const el = document.createElement(tag);
-
 	if (className) el.className = className;
 	if (text) el.textContent = text;
-
 	return el;
 }
 
-/* =========================================================
-   CREATE ICON (SMART HANDLER)
-   Supports:
-   - FontAwesome (fa-solid fa-house)
-   - Images (img/icon.png)
-   - Emoji fallback (🌐)
-========================================================= */
+/* Icon handler */
 function createIcon(iconValue, name) {
-	let icon;
+	if (!iconValue) return createEl("span", "icon-fallback", "📁");
 
-	if (!iconValue) {
-		icon = createEl("span", "icon-fallback", "📁");
-		return icon;
-	}
-
-	// IMAGE ICON
 	if (iconValue.includes("/") || iconValue.startsWith("http")) {
-		icon = createEl("img");
-		icon.src = iconValue;
-		icon.alt = name || "icon";
-		return icon;
+		const img = createEl("img");
+		img.src = iconValue;
+		img.alt = name || "icon";
+		return img;
 	}
 
-	// FONT AWESOME ICON
 	if (iconValue.startsWith("fa")) {
-		icon = createEl("i", iconValue);
-		return icon;
+		return createEl("i", iconValue);
 	}
 
-	// EMOJI / TEXT
-	icon = createEl("span", "icon-fallback", iconValue);
-	return icon;
+	return createEl("span", "icon-fallback", iconValue);
 }
 
-/* =========================================================
-   CREATE ONE TILE
-========================================================= */
+/* Tile */
 function createTile(item) {
-
 	const link = createEl("a", "side-item");
 
-	// BASIC ATTRIBUTES
 	link.href = item.url || "#";
 	link.target = "_blank";
 	link.rel = "noopener noreferrer";
 
-	// TOOLTIP (nice UX bonus)
 	if (item.description) {
 		link.title = item.description;
 	}
 
-	// ICON
 	const icon = createIcon(item.icon, item.name);
 
-	// TEXT LABEL
 	const textWrap = createEl("span", "label");
 	const text = createEl("span", "title", item.name || "Untitled");
 
 	textWrap.appendChild(text);
 
-	// OPTIONAL DESCRIPTION (visible)
 	if (item.description) {
 		const desc = createEl("small", "desc", item.description);
 		textWrap.appendChild(desc);
 	}
 
-	// ASSEMBLE
 	link.appendChild(icon);
 	link.appendChild(textWrap);
 
-	// OPTIONAL CUSTOM CLASS (from JSON)
 	if (item.class) {
 		link.classList.add(item.class);
 	}
@@ -211,27 +151,22 @@ function createTile(item) {
 	return link;
 }
 
-/* =========================================================
-   RENDER GRID
-========================================================= */
+/* Render grid */
 function renderGrid(data) {
+	if (!grid) return;
 
-	// Clear safely
 	grid.innerHTML = "";
 
 	const fragment = document.createDocumentFragment();
 
 	data.forEach(item => {
-		const tile = createTile(item);
-		fragment.appendChild(tile);
+		fragment.appendChild(createTile(item));
 	});
 
 	grid.appendChild(fragment);
 }
 
-/* =========================================================
-   LOAD JSON
-========================================================= */
+/* Load grid JSON */
 async function loadGrid() {
 	if (!grid) return;
 
@@ -244,7 +179,6 @@ async function loadGrid() {
 
 		const data = await res.json();
 
-		// Validate: must be array
 		if (!Array.isArray(data)) {
 			throw new Error("JSON is not an array");
 		}
@@ -255,14 +189,68 @@ async function loadGrid() {
 		console.error("GRID LOAD FAILURE:", err);
 
 		grid.innerHTML = `
-			<div class="grid-error">
-				⚠ Failed to load links
-			</div>
+			<div class="grid-error">⚠ Failed to load links</div>
 		`;
 	}
 }
 
+
+/* =========================================================
+   GENERIC PROJECT LIST LOADER
+========================================================= */
+
+async function loadProjectList(elementId, jsonPath) {
+	const listEl = document.getElementById(elementId);
+	if (!listEl) return;
+
+	try {
+		const res = await fetch(jsonPath, {
+			cache: "no-store"
+		});
+
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+		const data = await res.json();
+
+		if (!Array.isArray(data)) {
+			throw new Error("JSON must be an array");
+		}
+
+		listEl.innerHTML = "";
+
+		const fragment = document.createDocumentFragment();
+
+		data.forEach(item => {
+			const li = createEl("li");
+			const p = createEl("p");
+
+			const link = createEl("a");
+			link.href = item.url || "#";
+			link.target = "_blank";
+			link.rel = "noopener noreferrer";
+			link.textContent = item.name || "Untitled";
+
+			p.appendChild(link);
+			li.appendChild(p);
+			fragment.appendChild(li);
+		});
+
+		listEl.appendChild(fragment);
+
+	} catch (err) {
+		console.error(`LOAD FAILURE (${elementId}):`, err);
+		listEl.innerHTML = `<li>⚠ Failed to load</li>`;
+	}
+}
+
+
 /* =========================================================
    INIT
 ========================================================= */
-window.addEventListener("DOMContentLoaded", loadGrid);
+
+window.addEventListener("DOMContentLoaded", () => {
+	loadGrid();
+
+	loadProjectList("githubProjects", "./data/projects.json");
+	loadProjectList("codepenProjects", "./data/codepen.json");
+});
