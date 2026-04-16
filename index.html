@@ -69,7 +69,7 @@
                             <hr>
 
                             <ul id="codepenProjects"></ul>
-                            
+
 
                         </article>
                         <article role="tabpanel" id="tab-C" hidden>
@@ -97,28 +97,68 @@
 
                 <div class="window-body has-space">
 
-                    <h2>Bienvenido a la página de Jota</h2>
-                    <hr>
+                    <section class="tabs">
 
-                    <p>Soy un estudiante de Web y <strong>Técnico de Desarrollo de Aplicaciones Multiplataforma y
-                            Administración de Sistemas Informáticos y Redes.</strong></p>
+                        <!-- TAB BUTTONS -->
+                        <menu role="tablist" aria-label="About Tabs">
+                            <button role="tab" aria-controls="about-tab" aria-selected="true">
+                                About Me
+                            </button>
 
-                    <p>Actualmente estoy estudiando en <a href=https://www.dicampus.es/ target="_blank">Dicampus</a>
-                        con <a href=https://miguelesteban.net target="_blank">un profe muy guay</a></p>
+                            <button role="tab" aria-controls="skills-tab">
+                                Skills
+                            </button>
 
-                    <p>Acá encontrarás una mezcla entre repositorios que me han gustado hacer, además de un
-                        toque de espacio personal.</p>
+                            <button role="tab" aria-controls="knowledge-tab">
+                                Conocimientos
+                            </button>
+                        </menu>
+
+                        <!-- TAB 1: ABOUT ME -->
+                        <article role="tabpanel" id="about-tab">
+                            <h2>Bienvenido a la página de Jota</h2>
+                            <hr>
+
+                            <p>Soy un estudiante de Web y <strong>Técnico de Desarrollo de Aplicaciones Multiplataforma
+                                    y
+                                    Administración de Sistemas Informáticos y Redes.</strong></p>
+
+                            <p>Actualmente estoy estudiando en <a href=https://www.dicampus.es/
+                                    target="_blank">Dicampus</a>
+                                con <a href=https://miguelesteban.net target="_blank">un profe muy guay</a></p>
+
+                            <p>Acá encontrarás una mezcla entre repositorios que me han gustado hacer, además de un
+                                toque de espacio personal.</p>
 
 
 
 
-                    <p><strong>Neocities</strong> es un sitio bastante interesante y ha sido muy simple hacer una
-                        página.
-                        Esta página <i>consiste de HTML, CSS y un poco de JavaScript</i>.</p>
+                            <p><strong>Neocities</strong> es un sitio bastante interesante y ha sido muy simple hacer
+                                una
+                                página.
+                                Esta página <i>consiste de HTML, CSS y un poco de JavaScript</i>.</p>
 
-                    <p>También estoy usando este <a href="https://khang-nd.github.io/7.css">Framework para
-                            construir componentes de Windows.</a></p>
+                            <p>También estoy usando este <a href="https://khang-nd.github.io/7.css">Framework para
+                                    construir componentes de Windows.</a></p>
+                        </article>
 
+                        <!-- TAB 2: SKILLS -->
+                        <article role="tabpanel" id="skills-tab" hidden>
+                            <h2>Skills</h2>
+                            <hr>
+
+                            <ul id="skillsList"></ul>
+                        </article>
+
+                        <!-- TAB 3: CONOCIMIENTOS -->
+                        <article role="tabpanel" id="knowledge-tab" hidden>
+                            <h2>Conocimientos</h2>
+                            <hr>
+
+                            <ul id="knowledgeList"></ul>
+                        </article>
+
+                    </section>
 
                 </div>
             </div>

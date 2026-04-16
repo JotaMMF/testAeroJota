@@ -1,32 +1,43 @@
 /* =========================================================
-   TAB SYSTEM (ARIA ACCESSIBLE)
+   TAB SYSTEM (SCOPED PER WINDOW)
+   - Each .window becomes an independent tab group
+   - Fixes global tab conflict issue
 ========================================================= */
 
-const tabs = document.querySelectorAll('[role="tab"]');
-const panels = document.querySelectorAll('[role="tabpanel"]');
+function initTabs(container) {
+	const tabs = container.querySelectorAll('[role="tab"]');
+	const panels = container.querySelectorAll('[role="tabpanel"]');
 
-function activateTab(tab) {
-	if (!tab) return;
+	if (!tabs.length || !panels.length) return;
 
-	const targetId = tab.getAttribute("aria-controls");
+	function activateTab(tab) {
+		const targetId = tab.getAttribute("aria-controls");
 
-	tabs.forEach(t => t.setAttribute("aria-selected", "false"));
-	tab.setAttribute("aria-selected", "true");
+		// Only affect tabs inside this container
+		tabs.forEach(t => t.setAttribute("aria-selected", "false"));
+		tab.setAttribute("aria-selected", "true");
 
-	panels.forEach(panel => {
-		panel.hidden = panel.id !== targetId;
-	});
-}
+		panels.forEach(panel => {
+			panel.hidden = panel.id !== targetId;
+		});
+	}
 
-if (tabs.length && panels.length) {
 	tabs.forEach((tab, i) => {
 		tab.addEventListener("click", () => activateTab(tab));
+
+		// initial state per group
 		tab.setAttribute("aria-selected", i === 0 ? "true" : "false");
 	});
 
+	// show first panel per group
 	panels.forEach((p, i) => {
 		p.hidden = i !== 0;
 	});
+}
+
+/* Init all tab containers */
+function initAllTabs() {
+	document.querySelectorAll(".tabs").forEach(initTabs);
 }
 
 
@@ -72,7 +83,7 @@ function playRandomSong() {
 	lastIndex = index;
 
 	player.src = songs[index];
-	player.play().catch(() => {});
+	player.play().catch(() => { });
 }
 
 if (player) {
@@ -196,19 +207,43 @@ async function loadGrid() {
 
 
 /* =========================================================
-   GENERIC PROJECT LIST LOADER
+   UNIVERSAL LIST LOADER
+   - Supports objects OR simple strings
+   - Reusable for ANY <ul>
 ========================================================= */
 
-async function loadProjectList(elementId, jsonPath) {
+/* =========================================================
+   UNIVERSAL JSON LIST LOADER
+   ---------------------------------------------------------
+   PURPOSE:
+   - Loads data from JSON into any <ul>
+   - Supports:
+	 • Simple lists (["HTML", "CSS"])
+	 • Link objects ({name, url})
+   - Keeps DOM creation safe (no innerHTML injection)
+========================================================= */
+
+async function loadList(elementId, jsonPath, options = {}) {
 	const listEl = document.getElementById(elementId);
 	if (!listEl) return;
 
-	try {
-		const res = await fetch(jsonPath, {
-			cache: "no-store"
-		});
+	/* -----------------------------
+	   OPTIONS (configurable behavior)
+	------------------------------ */
+	const {
+		type = "auto",        // "simple" | "links" | "auto"
+		bullet = false        // forces bullet styling if needed
+	} = options;
 
-		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+	try {
+		/* -----------------------------
+		   FETCH JSON DATA
+		------------------------------ */
+		const res = await fetch(jsonPath, { cache: "no-store" });
+
+		if (!res.ok) {
+			throw new Error(`HTTP ${res.status}`);
+		}
 
 		const data = await res.json();
 
@@ -216,29 +251,57 @@ async function loadProjectList(elementId, jsonPath) {
 			throw new Error("JSON must be an array");
 		}
 
+		/* -----------------------------
+		   CLEAR OLD CONTENT
+		------------------------------ */
 		listEl.innerHTML = "";
 
 		const fragment = document.createDocumentFragment();
 
+		/* -----------------------------
+		   BUILD LIST ITEMS
+		------------------------------ */
 		data.forEach(item => {
-			const li = createEl("li");
-			const p = createEl("p");
+			const li = document.createElement("li");
 
-			const link = createEl("a");
-			link.href = item.url || "#";
-			link.target = "_blank";
-			link.rel = "noopener noreferrer";
-			link.textContent = item.name || "Untitled";
+			/* =========================
+			   SIMPLE LIST (strings)
+			========================= */
+			if (type === "simple" || typeof item === "string") {
+				li.textContent = item;
+			}
 
-			p.appendChild(link);
-			li.appendChild(p);
+			/* =========================
+			   LINK LIST (objects)
+			========================= */
+			else if (type === "links" || typeof item === "object") {
+				const p = document.createElement("p");
+
+				const a = document.createElement("a");
+				a.href = item.url || "#";
+				a.target = "_blank";
+				a.rel = "noopener noreferrer";
+				a.textContent = item.name || "Untitled";
+
+				p.appendChild(a);
+				li.appendChild(p);
+			}
+
 			fragment.appendChild(li);
 		});
 
 		listEl.appendChild(fragment);
 
+		/* -----------------------------
+		   OPTIONAL BULLET MODE
+		   (used for knowledge section)
+		------------------------------ */
+		if (bullet) {
+			listEl.classList.add("bullet-list");
+		}
+
 	} catch (err) {
-		console.error(`LOAD FAILURE (${elementId}):`, err);
+		console.error(`LIST LOAD ERROR (${elementId}):`, err);
 		listEl.innerHTML = `<li>⚠ Failed to load</li>`;
 	}
 }
@@ -299,8 +362,21 @@ window.addEventListener("DOMContentLoaded", () => {
 	setRandomBackground();
 
 	loadGrid();
-	loadProjectList("githubProjects", "./data/projects.json");
-	loadProjectList("codepenProjects", "./data/codepen.json");
 
-	applyLeBounce(); // 👈 ADD THIS
+	// Projects (links)
+	loadList("githubProjects", "./data/projects.json", { type: "links" });
+	loadList("codepenProjects", "./data/codepen.json", { type: "links" });
+
+	loadList("skillsList", "./data/skills.json", {
+		type: "simple",
+		bullet: true
+	});
+
+	loadList("knowledgeList", "./data/knowledge.json", {
+		type: "simple",
+		bullet: true
+	});
+
+	applyLeBounce();
+	initAllTabs();
 });
