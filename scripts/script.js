@@ -243,14 +243,64 @@ async function loadProjectList(elementId, jsonPath) {
 	}
 }
 
+/* =========================================================
+   RANDOM BACKGROUND IMAGE
+   - Picks a random image from /img
+   - Overrides CSS background
+========================================================= */
+
+const backgrounds = [
+	"./img/asadal.jpg",
+	"./img/asadal2.jpg",
+	"./img/asadal3.jpg",
+	"./img/asadal4.jpg",
+	"./img/asadal5.jpg"
+	// 👉 add more images here
+];
+
+function setRandomBackground() {
+	if (!backgrounds.length) return;
+
+	const index = Math.floor(Math.random() * backgrounds.length);
+	const selected = backgrounds[index];
+
+	document.body.style.backgroundImage = `url("${selected}")`;
+}
+
+/* =========================================================
+   TEXT LETTER SPLITTER (LEBOUNCE)
+   - Wraps each letter in <span>
+   - Enables per-letter animation automatically
+========================================================= */
+
+function applyLeBounce() {
+	const elements = document.querySelectorAll(".lebounce");
+
+	elements.forEach(el => {
+		const text = el.textContent;
+		el.textContent = "";
+
+		[...text].forEach((char, i) => {
+			const span = document.createElement("span");
+
+			span.textContent = char === " " ? "\u00A0" : char;
+			span.style.animationDelay = `${i * 0.1}s`;
+
+			el.appendChild(span);
+		});
+	});
+}
 
 /* =========================================================
    INIT
 ========================================================= */
 
 window.addEventListener("DOMContentLoaded", () => {
-	loadGrid();
+	setRandomBackground();
 
+	loadGrid();
 	loadProjectList("githubProjects", "./data/projects.json");
 	loadProjectList("codepenProjects", "./data/codepen.json");
+
+	applyLeBounce(); // 👈 ADD THIS
 });
