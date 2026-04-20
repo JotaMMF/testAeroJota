@@ -1,12 +1,20 @@
-@keyframes wiggle {
-	0% { transform: rotate(3deg); }
-	50% { transform: rotate(-3deg); }
-	100% { transform: rotate(3deg); }
-}
-
 /* =========================================================
-   LEBOUNCE TEXT ANIMATION
+   ANIMATIONS
 ========================================================= */
+
+@keyframes wiggle {
+	0% {
+		transform: rotate(3deg);
+	}
+
+	50% {
+		transform: rotate(-3deg);
+	}
+
+	100% {
+		transform: rotate(3deg);
+	}
+}
 
 .lebounce span {
 	display: inline-block;
@@ -14,7 +22,6 @@
 	animation-timing-function: cubic-bezier(0.25, 0.85, 0.4, 1);
 }
 
-/* Bounce animation */
 @keyframes bounce {
 	0% {
 		transform: scale(1, 1) translateY(0);
@@ -41,34 +48,35 @@
 	}
 }
 
+
 /* =========================================================
-   GLOBAL RESET
+   BASE RESET
 ========================================================= */
+
 * {
 	box-sizing: border-box;
 }
 
 body {
 	margin: 0;
-	display: flex;
-	justify-content: center;
-	align-items: start;
 	min-height: 100vh;
 
-	/* Fallback background (used if JS fails) */
+	display: block;
+	min-height: 100vh;
+
 	background-image: url("../img/asadal.jpg");
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-attachment: fixed;
-
-	/* Smooth transition when JS swaps images */
-	transition: background-image 0.5s ease-in-out;
+	background-attachment: scroll;
+	transition: none;
 }
 
+
 /* =========================================================
-   MAIN GRID LAYOUT (MOBILE FIRST)
+   LAYOUT GRID
 ========================================================= */
+
 .container {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -80,24 +88,30 @@ body {
 	margin-top: 50px;
 }
 
-/* =========================================================
-   DESKTOP LAYOUT (3 COLUMNS)
-========================================================= */
+/* Desktop layout */
 @media (min-width: 900px) {
 	.container {
 		grid-template-columns: repeat(3, 1fr);
 	}
 
-	.cell.s-left { grid-column: 1; }
-	.cell.x { grid-column: 2; }
-	.cell.x-right { grid-column: 3; }
+	.cell.s-left {
+		grid-column: 1;
+	}
+
+	.cell.x {
+		grid-column: 2;
+	}
+
+	.cell.x-right {
+		grid-column: 3;
+	}
 }
 
 
-
 /* =========================================================
-   CELL BASE STYLE
+   CELL SYSTEM (GRID WINDOWS)
 ========================================================= */
+
 .cell {
 	display: flex;
 	justify-content: center;
@@ -109,37 +123,33 @@ body {
 	font-size: calc(1rem + 0.5vw);
 }
 
-/* Animated headings */
+/* Headings */
 .cell h1 {
 	margin: 0;
 	font-size: 1.5rem;
-
 	-webkit-text-stroke: 1px rgb(2, 72, 104);
 	color: white;
-
 }
 
-/* =========================================================
-   FULL WIDTH SECTIONS
-========================================================= */
+/* Full width sections */
 .cell.h,
 .cell.f,
 .cell.EX {
 	grid-column: 1 / -1;
 }
 
-/* =========================================================
-   RESET FOR SAFETY
-========================================================= */
+/* Reset safety overrides */
 .cell.s-left,
 .cell.x,
 .cell.x-right {
 	grid-column: auto;
 }
 
+
 /* =========================================================
-   WINDOW STYLING (7.css)
+   WINDOWS (7.CSS BASE)
 ========================================================= */
+
 .window-body {
 	text-align: center;
 }
@@ -149,22 +159,29 @@ body {
 	max-width: 100%;
 }
 
-/* Top banner background */
+
+/* =========================================================
+   BACKGROUND THEMES
+========================================================= */
+
+/* Top banner */
 .window-body.has-space.top {
-	background: url("../img/asadal_top.jpg") no-repeat center center fixed;
-	background-size: auto;
+	background: url("../img/asadal_top.jpg") no-repeat center center;
+	background-attachment: scroll;
 }
 
-/* Bottom music background */
+/* Music window background */
 .cell.f .window-body {
 	background-image: url("../img/water-43.gif");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 
+
 /* =========================================================
-   DETAILS / ACCORDION SYSTEM
+   ACCORDION SYSTEM
 ========================================================= */
+
 details {
 	margin-bottom: 8px;
 }
@@ -174,25 +191,33 @@ summary {
 	font-weight: bold;
 }
 
-/* smooth collapse */
-details > *:not(summary) {
+/* collapse animation */
+details>*:not(summary) {
 	overflow: hidden;
 	max-height: 0;
-	transition: max-height 0.3s ease;
+	transition: none;
 }
 
-details[open] > *:not(summary) {
+details[open]>*:not(summary) {
 	max-height: 200px;
 }
+
+
+/* =========================================================
+   LIST RESET (TABS)
+========================================================= */
 
 article[role="tabpanel"] ul {
 	list-style: none;
 	padding: 0;
+	margin: 0;
 }
 
+
 /* =========================================================
-   SIDE GRID (WIN7 DESKTOP STYLE)
+   SIDE GRID (QUICK LAUNCH)
 ========================================================= */
+
 .side-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -200,7 +225,6 @@ article[role="tabpanel"] ul {
 	padding: 10px;
 }
 
-/* icon tile */
 .side-grid a {
 	display: flex;
 	align-items: center;
@@ -222,22 +246,24 @@ article[role="tabpanel"] ul {
 	transition: background 0.12s ease, border 0.12s ease, transform 0.08s ease;
 }
 
-/* hover selection (Win7 blue) */
+/* hover */
 .side-grid a:hover {
 	background: rgba(51, 153, 255, 0.18);
 	border: 1px solid rgba(51, 153, 255, 0.45);
-	transform: translateY(-1px);
+	transform: translate3d(0, -1px, 0);
 }
 
-/* click feedback */
+/* click */
 .side-grid a:active {
 	background: rgba(51, 153, 255, 0.28);
-	transform: translateY(0px);
+	transform: translateY(0);
 }
 
+
 /* =========================================================
-   ICONS (TRUE DARK FIX — NO FILTERS)
+   ICONS
 ========================================================= */
+
 .side-grid i,
 .side-grid svg {
 	font-size: 1.25rem;
@@ -256,15 +282,16 @@ article[role="tabpanel"] ul {
 	opacity: 1;
 }
 
-/* optional text wrapper */
 .side-grid a span {
 	line-height: 1.1;
 	display: block;
 }
 
+
 /* =========================================================
-   MOBILE STACKING
+   MOBILE FIXES
 ========================================================= */
+
 @media (max-width: 899px) {
 	.container {
 		grid-template-columns: 1fr;
@@ -280,3 +307,8 @@ article[role="tabpanel"] ul {
 	}
 }
 
+@media (min-width: 900px) {
+	body {
+		background-attachment: fixed;
+	}
+}

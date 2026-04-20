@@ -117,6 +117,8 @@ function createIcon(iconValue, name) {
 	if (iconValue.includes("/") || iconValue.startsWith("http")) {
 		const img = createEl("img");
 		img.src = iconValue;
+		img.loading = "lazy";
+		img.decoding = "async";
 		img.alt = name || "icon";
 		return img;
 	}
@@ -254,7 +256,7 @@ async function loadList(elementId, jsonPath, options = {}) {
 		/* -----------------------------
 		   CLEAR OLD CONTENT
 		------------------------------ */
-		listEl.innerHTML = "";
+		listEl.textContent = "";
 
 		const fragment = document.createDocumentFragment();
 
@@ -314,10 +316,7 @@ async function loadList(elementId, jsonPath, options = {}) {
 
 const backgrounds = [
 	"./img/asadal.jpg",
-	"./img/asadal2.jpg",
-	"./img/asadal3.jpg",
-	"./img/asadal4.jpg",
-	"./img/asadal5.jpg"
+	"./img/asadal2.jpg"
 	// 👉 add more images here
 ];
 
