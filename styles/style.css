@@ -83,9 +83,8 @@ body {
 	grid-auto-rows: minmax(100px, auto);
 	gap: 2vw;
 
-	width: 95vw;
-	max-width: 1200px;
-	margin-top: 50px;
+	width: min(95vw, 1200px);
+	margin: 50px auto 0 auto;
 }
 
 /* Desktop layout */
@@ -211,6 +210,19 @@ article[role="tabpanel"] ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+
+#skillsList strong,
+#knowledgeList strong {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 1rem;
+}
+
+#skillsList ul,
+#knowledgeList ul {
+	margin: 6px 0 10px 18px;
+	padding: 0;
 }
 
 

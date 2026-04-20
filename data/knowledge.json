@@ -1,7 +1,26 @@
 [
-  "Maquetación web",
-  "Accesibilidad básica (ARIA)",
-  "Consumo de APIs",
-  "Diseño tipo Windows",
-  "Neocities static hosting"
+  {
+    "categoria": "Desarrollo Web",
+    "elementos": [
+      "Diseño responsive",
+      "Hosting de sitios estáticos",
+      "Interacción con JavaScript en el cliente",
+      "Optimización básica de rendimiento web"
+    ]
+  },
+  {
+    "categoria": "Accesibilidad",
+    "elementos": [
+      "Uso de roles ARIA",
+      "HTML semántico"
+    ]
+  },
+  {
+    "categoria": "Buenas prácticas",
+    "elementos": [
+      "Separación de datos e interfaz (JSON + JS)",
+      "Estructura modular del código",
+      "Depuración con DevTools del navegador"
+    ]
+  }
 ]

@@ -1,7 +1,47 @@
 [
-  "HTML5",
-  "CSS3 (Grid & Flexbox)",
-  "JavaScript (DOM, Fetch API)",
-  "Responsive Design",
-  "7.css UI styling"
+  {
+    "categoria": "Frontend",
+    "elementos": [
+      "HTML5",
+      "CSS3 (Flexbox, Grid, diseño responsive)",
+      "JavaScript (ES6+, DOM, Fetch API)",
+      "Interfaz con 7.css",
+      "Manejo de datos JSON"
+    ]
+  },
+  {
+    "categoria": "Backend / Programación",
+    "elementos": [
+      "C# (nivel básico / en aprendizaje)",
+      "PHP",
+      "Python",
+      "Java (conocimientos básicos)"
+    ]
+  },
+  {
+    "categoria": "Móvil",
+    "elementos": [
+      "Desarrollo Android (nivel básico)"
+    ]
+  },
+  {
+    "categoria": "Herramientas y flujo de trabajo",
+    "elementos": [
+      "Git y GitHub",
+      "Despliegue en GitHub Pages",
+      "Hosting estático en Neocities",
+      "Visual Studio Code",
+      "Herramientas de desarrollo del navegador"
+    ]
+  },
+  {
+    "categoria": "Conceptos",
+    "elementos": [
+      "Diseño responsive",
+      "Accesibilidad (roles ARIA básicos)",
+      "Arquitectura frontend modular",
+      "Consumo de APIs REST",
+      "Fundamentos de UI/UX"
+    ]
+  }
 ]

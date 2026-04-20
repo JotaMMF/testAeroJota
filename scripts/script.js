@@ -269,8 +269,28 @@ async function loadList(elementId, jsonPath, options = {}) {
 			/* =========================
 			   SIMPLE LIST (strings)
 			========================= */
-			if (type === "simple" || typeof item === "string") {
+			if (typeof item === "string") {
 				li.textContent = item;
+			}
+
+			if (typeof item === "object" && item.categoria) {
+				const strong = document.createElement("strong");
+				strong.textContent = item.categoria;
+
+				li.appendChild(strong);
+
+				const subList = document.createElement("ul");
+
+				item.elementos.forEach(subItem => {
+					const subLi = document.createElement("li");
+					subLi.textContent = subItem;
+					subList.appendChild(subLi);
+				});
+
+				li.appendChild(subList);
+
+				const hr = document.createElement("hr");
+				li.appendChild(hr);
 			}
 
 			/* =========================
