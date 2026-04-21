@@ -74,6 +74,20 @@ body {
 
 
 /* =========================================================
+   GREETING
+========================================================= */
+#greeting {
+    margin: 0;
+    font-size: 2rem;
+    font-family: 'Frutiger', sans-serif;
+    font-weight: 700;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-align: center;
+}
+
+
+/* =========================================================
    LAYOUT GRID
 ========================================================= */
 
@@ -142,6 +156,15 @@ body {
 .cell.x,
 .cell.x-right {
 	grid-column: auto;
+}
+
+/* =========================================================
+   CLOCK
+========================================================= */
+.cell.clock {
+    grid-column: 1 / -1;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -221,10 +244,8 @@ article[role="tabpanel"] ul {
 
 #skillsList ul,
 #knowledgeList ul {
-	margin: 6px 0 10px 18px;
 	padding: 0;
 }
-
 
 /* =========================================================
    SIDE GRID (QUICK LAUNCH)

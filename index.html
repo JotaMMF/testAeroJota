@@ -6,17 +6,20 @@
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipclock@0.7.8/compiled/flipclock.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- 7.css -->
     <link rel="stylesheet" href="https://unpkg.com/7.css/dist/7.scoped.css">
     <!-- Your styles -->
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/widgets.css">
 </head>
 
 <body>
     <div class="container">
 
-        <!--TOP BAR-------------------------------->
+        <!--TOP BAR-------GREETING------------------->
 
         <div class="cell h win7">
             <div class="window glass active" style="width: 100%; --w7-w-bg: #ff9900;">
@@ -30,9 +33,29 @@
                 </div>
                 <div class="window-body has-space top">
                     <h1 class="lebounce">WELCOME TO THE JOTA PAGE!!!</h1>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- =========================
+            CLOCK
+        ========================== -->
+        <div class="cell clock">
+            <div class="window-body has-space">
+                <h2 id="greeting" class="lebounce"></h2>
+                <div class="clock-wrapper">
+                    <div class="clock-container">
+                        <div id="flipClock"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
 
         <!--LEFT------------------------------->
 
@@ -83,7 +106,7 @@
             </div>
         </div>
 
-        <!--RIGHT------------------------------->
+        <!--CENTER------------------------------->
         <div class="cell x win7">
             <div class="window glass active" style="--w7-w-bg: #16e439;">
                 <div class="title-bar">
@@ -164,6 +187,7 @@
             </div>
         </div>
 
+        <!-- RIGHT -->
         <div class="cell x-right win7">
             <div class="window glass active" style="--w7-w-bg: #0e0bc5;">
 
@@ -184,6 +208,14 @@
                     <div id="sideGrid" class="side-grid has-scrollbar">
                         <!-- JS injects JSON content here -->
                     </div>
+
+                    <h2 id="greeting" class="lebounce"></h2>
+                    <div class="clock-wrapper">
+                        <div class="clock-container">
+                            <div id="flipClock"></div>
+                        </div>
+                    </div>
+
 
                 </div>
 
@@ -232,6 +264,9 @@
 </body>
 
 <script src="scripts/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flipclock@0.7.8/compiled/flipclock.js"></script>
+<script src="scripts/widgets.js"></script>
 </body>
 
 </html>
