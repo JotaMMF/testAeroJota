@@ -225,23 +225,29 @@
 
         <!--BOTTOM------------------------------->
         <div class="cell f win7">
-            <div class="window active">
-                <div class="title-bar">
-                    <div class="title-bar-text">How about some music</div>
-                    <div class="title-bar-controls">
-                        <button aria-label="Minimize"></button>
-                        <button aria-label="Maximize"></button>
-                        <button aria-label="Close"></button>
-                    </div>
-                </div>
-                <div class="window-body has-space">
-                    <audio id="audioPlayer" controls>
-                    </audio>
-                    <br>
-                    <button onclick="playRandomSong()">Play Random Song</button>
-                </div>
+    <div class="window active">
+        <div class="title-bar">
+            <div class="title-bar-text">How about some music</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
             </div>
         </div>
+
+        <div class="window-body has-space">
+
+            <div id="nowPlaying">No song playing</div>
+            <br>
+
+            <audio id="audioPlayer" controls></audio>
+            <br>
+
+            <button id="randomSongBtn">Play Random Song</button>
+
+        </div>
+    </div>
+</div>
 
         <!--EXTRA------------------------------->
         <div class="cell EX win7">
@@ -263,10 +269,12 @@
 
 </body>
 
-<script src="scripts/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flipclock@0.7.8/compiled/flipclock.js"></script>
-<script src="scripts/widgets.js"></script>
+
+<script src="scripts/script.js" defer></script>
+<script src="scripts/widgets.js" defer></script>
+<script src="scripts/audio-player.js" defer></script>
 </body>
 
 </html>

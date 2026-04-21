@@ -57,43 +57,7 @@ document.querySelectorAll("details.accordion").forEach(details => {
 });
 
 
-/* =========================================================
-   AUDIO PLAYER
-========================================================= */
 
-const player = document.getElementById("audioPlayer");
-
-const songs = [
-	"https://files.catbox.moe/9pk0tz.mp3",
-	"https://files.catbox.moe/va5q43.mp3",
-	"https://files.catbox.moe/dhv4hb.mp3",
-	"https://files.catbox.moe/ih2z66.mp3"
-];
-
-let lastIndex = -1;
-
-function playRandomSong() {
-	if (!player) return;
-
-	let index;
-	do {
-		index = Math.floor(Math.random() * songs.length);
-	} while (index === lastIndex);
-
-	lastIndex = index;
-
-	player.src = songs[index];
-	player.play().catch(() => { });
-}
-
-if (player) {
-	player.volume = 0.10;
-	player.addEventListener("ended", playRandomSong);
-}
-
-window.addEventListener("click", () => {
-	playRandomSong();
-}, { once: true });
 
 
 /* =========================================================
