@@ -25,7 +25,7 @@
             <div class="window glass active" style="width: 100%; --w7-w-bg: #ff9900;">
                 <div class="title-bar">
                     <div class="title-bar-text">Jota's DC Page!!</div>
-                    
+
                 </div>
                 <div class="window-body has-space top">
                     <h1 class="lebounce">WELCOME TO THE JOTA PAGE!!!</h1>
@@ -107,7 +107,7 @@
             <div class="window glass active" style="--w7-w-bg: #16e439;">
                 <div class="title-bar">
                     <div class="title-bar-text">About me</div>
-                    
+
                 </div>
 
                 <div class="window-body has-space">
@@ -115,7 +115,7 @@
                     <section class="tabs">
 
                         <!-- TAB BUTTONS -->
-                        <menu role="tablist" aria-label="About Tabs">
+                        <menu role="tablist">
                             <button role="tab" aria-controls="about-tab" aria-selected="true">
                                 About Me
                             </button>
@@ -127,6 +127,11 @@
                             <button role="tab" aria-controls="knowledge-tab">
                                 Conocimientos
                             </button>
+
+                            <button role="tab" aria-controls="contact-tab">
+                                Contacto [WIP]
+                            </button>
+
                         </menu>
 
                         <!-- TAB 1: ABOUT ME -->
@@ -173,6 +178,32 @@
                             <ul id="knowledgeList"></ul>
                         </article>
 
+                        <!-- CONTACT -->
+                        <article role="tabpanel" id="contact-tab" hidden>
+                            <h2>Contact [WIP]</h2>
+                            <hr>
+
+                            <ul class="contact-list">
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <strong>E-Mail:</strong>
+                                    <a href="#" onclick="openMail(event)">your@email.com</a>
+                                </li>
+
+                                <li>
+                                    <i class="fa-brands fa-linkedin"></i>
+                                    <strong>LinkedIn:</strong>
+                                    <a href="#">Your LinkedIn</a>
+                                </li>
+
+                                <li>
+                                    <i class="fa-brands fa-github"></i>
+                                    <strong>GitHub:</strong>
+                                    <a href="#">Your GitHub</a>
+                                </li>
+                            </ul>
+                        </article>
+
                     </section>
 
                 </div>
@@ -187,7 +218,7 @@
                 <div class="title-bar">
                     <div class="title-bar-text">Quick Launch</div>
 
-                    
+
                 </div>
 
                 <!-- BODY (SCROLLABLE AREA) -->
@@ -213,32 +244,32 @@
 
         <!--BOTTOM------------------------------->
         <div class="cell f win7">
-    <div class="window active">
-        <div class="title-bar">
-            <div class="title-bar-text">How about some music</div>
-            
+            <div class="window active">
+                <div class="title-bar">
+                    <div class="title-bar-text">How about some music</div>
+
+                </div>
+
+                <div class="window-body has-space">
+
+                    <div id="nowPlaying">No song playing</div>
+                    <br>
+
+                    <audio id="audioPlayer" controls></audio>
+                    <br>
+
+                    <button id="randomSongBtn">Play Random Song</button>
+
+                </div>
+            </div>
         </div>
-
-        <div class="window-body has-space">
-
-            <div id="nowPlaying">No song playing</div>
-            <br>
-
-            <audio id="audioPlayer" controls></audio>
-            <br>
-
-            <button id="randomSongBtn">Play Random Song</button>
-
-        </div>
-    </div>
-</div>
 
         <!--EXTRA------------------------------->
         <div class="cell EX win7">
             <div class="window active" style="max-width: 300px">
                 <div class="title-bar">
                     <div class="title-bar-text">CELL EXTRA</div>
-                    
+
                 </div>
                 <div class="window-body has-space">
                     <p>© 2026 Jota. All rights reserved.</p>

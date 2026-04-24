@@ -40,6 +40,27 @@ function initAllTabs() {
 	document.querySelectorAll(".tabs").forEach(initTabs);
 }
 
+/* =========================================================
+   MAILTO HANDLER (OBFUSCATED EMAIL)
+========================================================= */
+
+function openMail(e) {
+	if (e) e.preventDefault();
+
+	const user = "your";
+	const domain = "email.com";
+
+	const subject = encodeURIComponent("Contact from your Neocities Website");
+
+	const body = encodeURIComponent(
+		"Hi Carlos,\n\n" +
+		"I'm contacting you regarding your website.\n\n" +
+		"Best regards,"
+	);
+
+	window.location.href = `mailto:${user}@${domain}?subject=${subject}&body=${body}`;
+}
+
 
 /* =========================================================
    ACCORDION SYSTEM
@@ -350,6 +371,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	loadList("githubProjects", "./data/projects.json", { type: "links" });
 	loadList("codepenProjects", "./data/codepen.json", { type: "links" });
 
+	// Skills & knowledge
 	loadList("skillsList", "./data/skills.json", {
 		type: "simple",
 		bullet: true
@@ -360,6 +382,14 @@ window.addEventListener("DOMContentLoaded", () => {
 		bullet: true
 	});
 
+	// Attach mail handler
+	const emailLink = document.getElementById("emailLink");
+	if (emailLink) {
+		emailLink.addEventListener("click", openMail);
+	}
+
+	// UI effects
 	applyLeBounce();
 	initAllTabs();
 });
+
