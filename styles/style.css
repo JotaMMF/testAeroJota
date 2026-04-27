@@ -133,7 +133,7 @@ body {
 
 .win7 .window {
 	display: inline-block;
-	width: max-content;
+	width: auto;
 	max-width: 100%;
 }
 
