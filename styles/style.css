@@ -132,7 +132,8 @@ body {
 }
 
 .win7 .window {
-	width: fit-content; /* ✅ changed */
+	display: inline-block;
+	width: max-content;
 	max-width: 100%;
 }
 
@@ -140,6 +141,12 @@ body {
 .cell.f .window {
 	min-width: 280px;
 	max-width: 100%;
+}
+
+.cell.f .window-body {
+	position: relative;
+	overflow: hidden;
+	display: block;
 }
 
 /* =========================================================
@@ -155,6 +162,9 @@ body {
 	position: absolute;
 	inset: 0;
 	z-index: 0;
+
+	/* IMPORTANT */
+	pointer-events: none;
 }
 
 .video-bg video {
@@ -166,6 +176,9 @@ body {
 .window-body .content {
 	position: relative;
 	z-index: 1;
+
+	display: inline-block; /* key for shrink-to-content behavior */
+	width: auto;
 }
 
 /* =========================================================
