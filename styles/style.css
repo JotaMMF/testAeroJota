@@ -3,17 +3,9 @@
 ========================================================= */
 
 @keyframes wiggle {
-	0% {
-		transform: rotate(3deg);
-	}
-
-	50% {
-		transform: rotate(-3deg);
-	}
-
-	100% {
-		transform: rotate(3deg);
-	}
+	0% { transform: rotate(3deg); }
+	50% { transform: rotate(-3deg); }
+	100% { transform: rotate(3deg); }
 }
 
 .lebounce span {
@@ -23,48 +15,28 @@
 }
 
 @keyframes bounce {
-	0% {
-		transform: scale(1, 1) translateY(0);
-	}
-
-	10% {
-		transform: scale(1.1, 0.9) translateY(0);
-	}
-
-	30% {
-		transform: scale(0.9, 1.1) translateY(-20px);
-	}
-
-	50% {
-		transform: scale(1.05, 0.95) translateY(0);
-	}
-
-	60% {
-		transform: scale(1, 1) translateY(-4px);
-	}
-
-	100% {
-		transform: scale(1, 1) translateY(0);
-	}
+	0% { transform: scale(1, 1) translateY(0); }
+	10% { transform: scale(1.1, 0.9) translateY(0); }
+	30% { transform: scale(0.9, 1.1) translateY(-20px); }
+	50% { transform: scale(1.05, 0.95) translateY(0); }
+	60% { transform: scale(1, 1) translateY(-4px); }
+	100% { transform: scale(1, 1) translateY(0); }
 }
-
 
 /* =========================================================
    BASE RESET
 ========================================================= */
 
-* {
-	box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
 	margin: 0;
 	min-height: 100vh;
-
 	display: block;
-	min-height: 100vh;
 
 	background-image: url("../img/asadal.jpg");
+	background-image: url("../img/asadal.webp");
+
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -72,20 +44,19 @@ body {
 	transition: none;
 }
 
-
 /* =========================================================
    GREETING
 ========================================================= */
-#greeting {
-    margin: 0;
-    font-size: 2rem;
-    font-family: 'Frutiger', sans-serif;
-    font-weight: 700;
-    -webkit-text-stroke: 1px black;
-    color: white;
-    text-align: center;
-}
 
+#greeting {
+	margin: 0;
+	font-size: 2rem;
+	font-family: 'Frutiger', sans-serif;
+	font-weight: 700;
+	-webkit-text-stroke: 1px black;
+	color: white;
+	text-align: center;
+}
 
 /* =========================================================
    LAYOUT GRID
@@ -101,28 +72,18 @@ body {
 	margin: 50px auto 0 auto;
 }
 
-/* Desktop layout */
 @media (min-width: 900px) {
 	.container {
 		grid-template-columns: repeat(3, 1fr);
 	}
 
-	.cell.s-left {
-		grid-column: 1;
-	}
-
-	.cell.x {
-		grid-column: 2;
-	}
-
-	.cell.x-right {
-		grid-column: 3;
-	}
+	.cell.s-left { grid-column: 1; }
+	.cell.x { grid-column: 2; }
+	.cell.x-right { grid-column: 3; }
 }
 
-
 /* =========================================================
-   CELL SYSTEM (GRID WINDOWS)
+   CELL SYSTEM
 ========================================================= */
 
 .cell {
@@ -136,7 +97,6 @@ body {
 	font-size: calc(1rem + 0.5vw);
 }
 
-/* Headings */
 .cell h1 {
 	margin: 0;
 	font-size: 1.5rem;
@@ -144,14 +104,12 @@ body {
 	color: white;
 }
 
-/* Full width sections */
 .cell.h,
 .cell.f,
 .cell.EX {
 	grid-column: 1 / -1;
 }
 
-/* Reset safety overrides */
 .cell.s-left,
 .cell.x,
 .cell.x-right {
@@ -161,15 +119,15 @@ body {
 /* =========================================================
    CLOCK
 ========================================================= */
+
 .cell.clock {
-    grid-column: 1 / -1;
-    justify-content: center;
-    align-items: center;
+	grid-column: 1 / -1;
+	justify-content: center;
+	align-items: center;
 }
 
-
 /* =========================================================
-   WINDOWS (7.CSS BASE)
+   WINDOWS
 ========================================================= */
 
 .window-body {
@@ -181,68 +139,81 @@ body {
 	max-width: 100%;
 }
 
-
 /* =========================================================
    BACKGROUND THEMES
 ========================================================= */
 
-/* Top banner */
 .window-body.has-space.top {
 	background: url("../img/asadal_top.jpg") no-repeat center center;
 	background-attachment: scroll;
 }
 
-/* Music window background */
 .cell.f .window-body {
-	background-image: url("../img/water-43.gif");
-	background-repeat: no-repeat;
-	background-size: cover;
+	position: relative;
+	overflow: hidden;
 }
-
 
 /* =========================================================
-   ACCORDION SYSTEM
+   🎥 VIDEO BACKGROUND (NEW)
 ========================================================= */
 
-details {
-	margin-bottom: 8px;
+.video-bg {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
 }
+
+.video-bg video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* content layer above video */
+.window-body .content {
+	position: relative;
+	z-index: 1;
+}
+
+/* =========================================================
+   ACCORDION
+========================================================= */
+
+details { margin-bottom: 8px; }
 
 summary {
 	cursor: pointer;
 	font-weight: bold;
 }
 
-/* collapse animation */
-details>*:not(summary) {
+details > *:not(summary) {
 	overflow: hidden;
 	max-height: 0;
 	transition: none;
 }
 
-details[open]>*:not(summary) {
+details[open] > *:not(summary) {
 	max-height: 200px;
 }
 
 .contact-list {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .contact-list li {
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+	margin: 10px 0;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .contact-list i {
-    width: 20px;
+	width: 20px;
 }
 
-
 /* =========================================================
-   LIST RESET (TABS)
+   LIST RESET
 ========================================================= */
 
 article[role="tabpanel"] ul {
@@ -264,7 +235,7 @@ article[role="tabpanel"] ul {
 }
 
 /* =========================================================
-   SIDE GRID (QUICK LAUNCH)
+   SIDE GRID
 ========================================================= */
 
 .side-grid {
@@ -295,19 +266,16 @@ article[role="tabpanel"] ul {
 	transition: background 0.12s ease, border 0.12s ease, transform 0.08s ease;
 }
 
-/* hover */
 .side-grid a:hover {
 	background: rgba(51, 153, 255, 0.18);
 	border: 1px solid rgba(51, 153, 255, 0.45);
 	transform: translate3d(0, -1px, 0);
 }
 
-/* click */
 .side-grid a:active {
 	background: rgba(51, 153, 255, 0.28);
 	transform: translateY(0);
 }
-
 
 /* =========================================================
    ICONS
@@ -336,15 +304,12 @@ article[role="tabpanel"] ul {
 	display: block;
 }
 
-
 /* =========================================================
-   MOBILE FIXES
+   MOBILE
 ========================================================= */
 
 @media (max-width: 899px) {
-	.container {
-		grid-template-columns: 1fr;
-	}
+	.container { grid-template-columns: 1fr; }
 
 	.cell.h,
 	.cell.f,
@@ -357,7 +322,5 @@ article[role="tabpanel"] ul {
 }
 
 @media (min-width: 900px) {
-	body {
-		background-attachment: fixed;
-	}
+	body { background-attachment: fixed; }
 }

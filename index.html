@@ -59,11 +59,7 @@
             <div class="window glass active" style="width: 100%; --w7-w-bg: #bb1327;">
                 <div class="title-bar">
                     <div class="title-bar-text">Jotabs</div>
-                    <div class="title-bar-controls">
-                        <button aria-label="Minimize"></button>
-                        <button aria-label="Maximize"></button>
-                        <button aria-label="Close"></button>
-                    </div>
+
                 </div>
                 <div class="window-body has-space">
                     <section class="tabs" style="max-width: 550px">
@@ -128,9 +124,9 @@
                                 Conocimientos
                             </button>
 
-                            <button role="tab" aria-controls="contact-tab">
+                            <!--<button role="tab" aria-controls="contact-tab">
                                 Contacto [WIP]
-                            </button>
+                            </button>-->
 
                         </menu>
 
@@ -149,9 +145,6 @@
 
                             <p>Acá encontrarás una mezcla entre repositorios que me han gustado hacer, además de un
                                 toque de espacio personal.</p>
-
-
-
 
                             <p><strong>Neocities</strong> es un sitio bastante interesante y ha sido muy simple hacer
                                 una
@@ -178,7 +171,7 @@
                             <ul id="knowledgeList"></ul>
                         </article>
 
-                        <!-- CONTACT -->
+                        <!-- CONTACT 
                         <article role="tabpanel" id="contact-tab" hidden>
                             <h2>Contact [WIP]</h2>
                             <hr>
@@ -202,7 +195,7 @@
                                     <a href="#">Your GitHub</a>
                                 </li>
                             </ul>
-                        </article>
+                        </article>-->
 
                     </section>
 
@@ -246,19 +239,29 @@
         <div class="cell f win7">
             <div class="window active">
                 <div class="title-bar">
-                    <div class="title-bar-text">How about some music</div>
+                    <div class="title-bar-text">Music Player!</div>
 
                 </div>
 
                 <div class="window-body has-space">
 
-                    <div id="nowPlaying">No song playing</div>
-                    <br>
+                    <!-- VIDEO BACKGROUND -->
+                    <div class="video-bg">
+                        <video autoplay muted loop playsinline preload="none">
+                            <source src="img/webp/water-43.mp4" type="video/mp4">
+                        </video>
+                    </div>
 
-                    <audio id="audioPlayer" controls></audio>
-                    <br>
+                    <!-- CONTENT -->
+                    <div class="content">
+                        <div id="nowPlaying">No song playing</div>
+                        <br>
 
-                    <button id="randomSongBtn">Play Random Song</button>
+                        <audio id="audioPlayer" controls></audio>
+                        <br>
+
+                        <button id="randomSongBtn">Play Random Song</button>
+                    </div>
 
                 </div>
             </div>

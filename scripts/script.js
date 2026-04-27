@@ -314,24 +314,54 @@ async function loadList(elementId, jsonPath, options = {}) {
 }
 
 /* =========================================================
-   RANDOM BACKGROUND IMAGE
-   - Picks a random image from /img
-   - Overrides CSS background
+   RANDOM BACKGROUND IMAGE (WITH WEBP SUPPORT)
+   ---------------------------------------------------------
+   PURPOSE:
+   - Picks a random background image
+   - Uses WebP when supported (smaller size)
+   - Falls back to JPG for older browsers
+   - Overrides CSS background dynamically
 ========================================================= */
 
+/* -----------------------------
+   WEBP SUPPORT DETECTION (CACHED)
+   - Runs once, reused everywhere
+------------------------------ */
+const supportsWebP = document
+	.createElement("canvas")
+	.toDataURL("image/webp")
+	.includes("data:image/webp");
+
+/* -----------------------------
+   BACKGROUND SOURCES
+------------------------------ */
 const backgrounds = [
-	"./img/asadal.jpg",
-	"./img/asadal2.jpg"
-	// 👉 add more images here
+	{ jpg: "./img/asadal.jpg",  webp: "./img/webp/asadal.webp" },
+	{ jpg: "./img/asadal2.jpg", webp: "./img/webp/asadal2.webp" },
+	{ jpg: "./img/asadal3.jpg", webp: "./img/webp/asadal3.webp" },
+	{ jpg: "./img/asadal4.jpg", webp: "./img/webp/asadal4.webp" },
+	{ jpg: "./img/asadal5.jpg", webp: "./img/webp/asadal5.webp" }
+	// 👉 add more images here using same structure
 ];
 
 function setRandomBackground() {
 	if (!backgrounds.length) return;
 
+	/* -----------------------------
+	   SELECT RANDOM IMAGE
+	------------------------------ */
 	const index = Math.floor(Math.random() * backgrounds.length);
 	const selected = backgrounds[index];
 
-	document.body.style.backgroundImage = `url("${selected}")`;
+	/* -----------------------------
+	   CHOOSE BEST FORMAT
+	------------------------------ */
+	const image = supportsWebP ? selected.webp : selected.jpg;
+
+	/* -----------------------------
+	   APPLY BACKGROUND
+	------------------------------ */
+	document.body.style.backgroundImage = `url("${image}")`;
 }
 
 /* =========================================================
