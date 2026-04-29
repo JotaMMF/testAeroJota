@@ -187,7 +187,8 @@ body {
 
 .window-body.has-space.top {
 	background: url("../img/asadal_top.jpg") no-repeat center center;
-	background-attachment: scroll;
+	background-image: url("../img/webp/asadal_top.webp");
+	background-size: cover;
 }
 
 /* =========================================================

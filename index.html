@@ -56,7 +56,7 @@
         <!--LEFT------------------------------->
 
         <div class="cell s-left win7">
-            <div class="window glass active" style="width: 100%; --w7-w-bg: #bb1327;">
+            <div class="window glass active" style="width: auto; --w7-w-bg: #bb1327;">
                 <div class="title-bar">
                     <div class="title-bar-text">Jotabs</div>
 
@@ -247,9 +247,10 @@
 
                     <!-- VIDEO BACKGROUND -->
                     <div class="video-bg">
-                        <video autoplay muted loop playsinline preload="none">
-                            <source src="img/webp/water-43.mp4" type="video/mp4">
-                        </video>
+                        <picture>
+                            <source srcset="img/webp/water-43.webp" type="image/webp">
+                            <img src="img/water-43.gif" alt="">
+                        </picture>
                     </div>
 
                     <!-- CONTENT -->
