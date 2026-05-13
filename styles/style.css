@@ -113,6 +113,14 @@ body {
 	grid-column: auto;
 }
 
+
+.cell.s-left .window,
+.cell.x .window,
+.cell.x-right .window
+ {
+	max-width: 100%;
+}
+
 /* =========================================================
    CLOCK
 ========================================================= */
@@ -132,15 +140,13 @@ body {
 }
 
 .win7 .window {
-	display: inline-block;
-	width: auto;
+	width: 100%;
 	max-width: 100%;
 }
 
 /* Music player sizing */
 .cell.f .window {
-	min-width: 280px;
-	max-width: 100%;
+	width:40%;
 }
 
 .cell.f .window-body {
@@ -187,8 +193,7 @@ body {
 
 .window-body.has-space.top {
 	background: url("../img/asadal_top.jpg") no-repeat center center;
-	background-image: url("../img/webp/asadal_top.webp");
-	background-size: cover;
+	background-attachment: scroll;
 }
 
 /* =========================================================
